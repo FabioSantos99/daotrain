@@ -1,22 +1,18 @@
 <?php
 
-require_once("connection.php");
-require_once("dao/SaveDAO.php");
+$db = "save_data";
+$host = "localhost";
+$user = "root";
+$pass = "password";
 
-$saveDao = new SaveDAO($conn);
+try {
 
-$name = $_POST["name"];
-$lastname = $_POST["lastname"];
-$age = $_POST["age"];
-$country = $_POST["country"];
+      $conn = new PDO("mysql:dbname=$db;host=$host", $user, $pass);
+}
+catch (PDOException $e) {
 
-$newSave = new Save();
+      $error = $e->getMessage();
+      echo "Erro: $error";
+}
 
-$newSave->setName($name);
-$newSave->setLastname($lastname);
-$newSave->setAge($age);
-$newSave->setCountry($country);
 
-$saveDao->create($newSave);
-
-header("Location: index.php");
