@@ -1,7 +1,7 @@
 <?php
 
-require_once("connection.php");
-require_once("dao/SaveDAO.php");
+include_once("connection.php");
+include_once("dao/SaveDAO.php");
 
 $saveDao = new SaveDAO($conn);
 
@@ -9,63 +9,35 @@ $saves = $saveDao->findAll();
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>DaoTrain</title>
-      <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-      <div id="main-container">
+<h1>Insira um dado:</h1>
 
-      <h1>Dao Train Form</h1>
+<form action="process.php" method="POST">
+    <div>
+       <label for="name">Nome: </label>
+       <input type="text" name="name" placeholder="Insira o nome">
+    </div>
 
-            <form action="process.php" method="POST">
+    <div>
+        <label for="lastname">Sobrenome: </label>
+        <input type="text" name="lastname" placeholder="Insira o sobrenome">
+    </div>
 
-            <div class="form-container">
-                  <label for="name">Nome: </label>
-                  <input type="text" id="name" name="name">
+    <div>
+        <label for="age">Idade:</label>
+        <input type="number" name="age" placeholder="Insira sua idade">
+    </div>
 
-            </div>
 
-            <div class="form-container">
-                  <label for="lastname">Sobrenome: </label>
-                  <input type="text" id="lastname" name="lastname">
+    <div>
+        <label for="country">País:</label>
+        <input type="text" name="country" placeholder="Insira o Pais de origem">
+    </div>
 
-            </div>
+    <input type="submit" value="Salvar">
+</form>
+<ul>
+    <?php foreach($saves as $save): ?>
+        <li><?= $save->getName() ?> - <?= $save->getLastname() ?> - <?= $save->getAge() ?> - <?= $save->getCountry() ?> </li>
+    <?php endforeach; ?>
+</ul>
 
-            <div class="form-container">
-                  <label for="Age">Idade: </label>
-                  <input type="number" id="age" name="age">
-
-            </div>
-
-            <div class="form-container">
-                  <label for="country">País: </label>
-                  <input type="text" id="country" name="country">
-
-            </div>
-
-                  <input type="submit" value="salvar">
-
-            </form>
-
-            <ul>
-                  <?php foreach($saves as $save): ?>
-
-                        <li><?= $save->getName() ?> -
-                        <?= $save->getLastname() ?>-
-                        <?= $save->getAge() ?> -
-                        <?= $save->getCountry() ?>
-                  </li>
-                  
-                  <?php endforeach; ?>
-            </ul>
-
-      </div>
-
-     
-</body>
-</html>
