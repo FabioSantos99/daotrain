@@ -1,6 +1,6 @@
 <?php
 
-$db = "save_data";
+$db = "savedata";
 $host = "localhost";
 $user = "root";
 $pass = "password";
